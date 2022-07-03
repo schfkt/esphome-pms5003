@@ -58,7 +58,7 @@ deep_sleep:
   sleep_duration: 4min
 
 uart:
-  rx_pin: D4
+  rx_pin: D3
   tx_pin: D8
   baud_rate: 9600
 

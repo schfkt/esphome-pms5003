@@ -1,6 +1,6 @@
 CONFIG=pms5003.yaml
 
-export PATH := $(PATH):~/.local/bin
+export PATH := $(PATH):$(HOME)/.local/bin
 
 .PHONY: run
 run:

@@ -1,5 +1,9 @@
 esphome:
   name: pms5003-1
+  on_boot:
+    priority: 600
+    then:
+      - switch.turn_on: pms_awake
 
 esp8266:
   board: d1_mini

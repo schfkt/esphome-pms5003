@@ -12,7 +12,7 @@ esp8266:
 logger:
 
 ota:
-  password: ""
+  password: !secret ota_password
 
 mqtt:
   broker: !secret mqtt_host

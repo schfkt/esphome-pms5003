@@ -1,12 +1,5 @@
 esphome:
   name: pms5003-1
-  on_boot:
-    priority: 600
-    then:
-      - switch.turn_on: pms_awake
-  on_shutdown:
-    then:
-      - switch.turn_off: pms_awake
 
 esp8266:
   board: d1_mini
@@ -22,17 +15,6 @@ mqtt:
   username: !secret mqtt_username
   password: !secret mqtt_password
   discovery: true
-  birth_message:
-  will_message:
-  on_message:
-    - topic: ${devicename}/ota_mode
-      payload: 'ON'
-      then:
-        - deep_sleep.prevent: deep_sleep_mode
-    - topic: ${devicename}/sleep_mode
-      payload: 'ON'
-      then:
-        - deep_sleep.enter: deep_sleep_mode
 
 wifi:
   ssid: !secret wifi_ssid
@@ -52,11 +34,6 @@ switch:
       inverted: no
     id: pms_awake
 
-deep_sleep:
-  id: deep_sleep_mode
-  run_duration: 1min
-  sleep_duration: 4min
-
 uart:
   rx_pin: D3
   tx_pin: D8
@@ -65,24 +42,10 @@ uart:
 sensor:
   - platform: pmsx003
     type: PMSX003
+    update_interval: 30s
     pm_1_0:
       name: "Particulate Matter <1.0µm Concentration"
-      filters:
-        - sliding_window_moving_average:
-            window_size: 30
-            send_every: 30
-            send_first_at: 30
     pm_2_5:
       name: "Particulate Matter <2.5µm Concentration"
-      filters:
-        - sliding_window_moving_average:
-            window_size: 30
-            send_every: 30
-            send_first_at: 30
     pm_10_0:
       name: "Particulate Matter <10.0µm Concentration"
-      filters:
-        - sliding_window_moving_average:
-            window_size: 30
-            send_every: 30
-            send_first_at: 30

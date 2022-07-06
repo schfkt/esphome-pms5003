@@ -1,9 +1,5 @@
 esphome:
   name: pms5003-1
-  on_boot:
-    priority: 600
-    then:
-      - switch.turn_on: pms_awake
 
 esp8266:
   board: d1_mini
@@ -46,10 +42,17 @@ uart:
 sensor:
   - platform: pmsx003
     type: PMSX003
-    update_interval: 30s
+    update_interval: 60s
     pm_1_0:
       name: "Particulate Matter <1.0µm Concentration"
     pm_2_5:
       name: "Particulate Matter <2.5µm Concentration"
     pm_10_0:
       name: "Particulate Matter <10.0µm Concentration"
+
+interval:
+  - interval: 9min
+    then:
+      - switch.turn_on: pms_awake
+      - delay: 65s
+      - switch.turn_off: pms_awake

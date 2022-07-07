@@ -42,17 +42,31 @@ uart:
 sensor:
   - platform: pmsx003
     type: PMSX003
-    update_interval: 60s
     pm_1_0:
       name: "Particulate Matter <1.0µm Concentration"
+      filters:
+        - sliding_window_moving_average:
+            window_size: 60
+            send_every: 60
+            send_first_at: 60
     pm_2_5:
       name: "Particulate Matter <2.5µm Concentration"
+      filters:
+        - sliding_window_moving_average:
+            window_size: 60
+            send_every: 60
+            send_first_at: 60
     pm_10_0:
       name: "Particulate Matter <10.0µm Concentration"
+      filters:
+        - sliding_window_moving_average:
+            window_size: 60
+            send_every: 60
+            send_first_at: 60
 
 interval:
-  - interval: 9min
+  - interval: 540s
     then:
       - switch.turn_on: pms_awake
-      - delay: 65s
+      - delay: 60s
       - switch.turn_off: pms_awake

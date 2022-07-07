@@ -65,7 +65,7 @@ sensor:
             send_first_at: 60
 
 interval:
-  - interval: 540s
+  - interval: 240s
     then:
       - switch.turn_on: pms_awake
       - delay: 60s
